@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import openSocket from "socket.io-client";
 
 // running locally
-const ENDPOINT = 'http://localhost:3001';
+const ENDPOINT = 'https://clueless-app1.herokuapp.com';
 
 
 
