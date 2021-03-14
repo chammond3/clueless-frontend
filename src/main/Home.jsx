@@ -3,9 +3,7 @@ import { io } from "socket.io-client";
 import openSocket from "socket.io-client";
 
 // running locally
-const ENDPOINT = 'https://clueless-app1.herokuapp.com';
-
-
+const ENDPOINT = 'http://localhost:3001';
 
 //import openSocket from "socket.io-client";
 const socket = openSocket(ENDPOINT, {transports: ['websocket']});
@@ -34,9 +32,10 @@ class Home extends Component {
 
     componentDidMount() {
       var state_current = this;
-      socket.emit("initial_data", "test, test, test");
       // start listener for retrieving data
       socket.on("get_data", state_current.getData);
+      
+      socket.emit("initial_data");
     }
 
     componentWillUnmount() {
