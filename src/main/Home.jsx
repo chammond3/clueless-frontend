@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { io } from "socket.io-client";
 import openSocket from "socket.io-client";
 
 const ENDPOINT = 'https://clueless-app1.herokuapp.com';

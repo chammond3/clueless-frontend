@@ -1,3 +1,29 @@
+.Top-padding {
+  padding-top: 10px;
+}
+
+.Board-room {
+  border-style: solid; 
+}
+
+.Board-row {
+  height: 18vh; 
+}
+
+.Board-hallway-vertical-border {
+  border-style: solid;
+}
+
+
+.Board-hallway-horizontal {
+  height: 3vmin;
+}
+
+.Board-hallway-horizontal-border {
+  border-style: solid;
+  height: 3vmin;
+}
+
 .App {
   text-align: center;
 }
@@ -15,13 +41,12 @@
 
 .App-header {
   background-color: #282c34;
+  width: 150px;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
+  
 }
 
 .App-link {
