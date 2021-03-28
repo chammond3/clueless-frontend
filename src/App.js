@@ -10,6 +10,15 @@ import Board from './main/Board';
 import Sidebar from "./main/Sidebar";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        players: [
+          {name: "Scarlet", location: "hallway11"},
+          {name: "Colonel", location: "Study"}]
+    }
+}
+  
   render() {
     return (
       <div className = "App">
@@ -22,7 +31,7 @@ class App extends Component {
               <Sidebar/>
             </Col>
             <Col xs={8}>
-              <Board />
+              <Board players={this.state.players}/>
             </Col>
           </Row>
         </Container>
