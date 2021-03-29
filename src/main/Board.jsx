@@ -4,9 +4,6 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 
-
-
-
 class Board extends Component {
 
     hallwayHorizontal(hallwayName) {

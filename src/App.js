@@ -8,6 +8,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Board from './main/Board';
 import Sidebar from "./main/Sidebar";
+import { E_ROOMS } from './main/Const';
+import Jumbotron from 'react-bootstrap/Jumbotron';
+import Alert from 'react-bootstrap/Alert';
 
 class App extends Component {
   constructor(props) {
@@ -15,7 +18,7 @@ class App extends Component {
     this.state = {
         players: [
           {name: "Scarlet", location: "hallway11"},
-          {name: "Colonel", location: "Study"}]
+          {name: "Colonel", location: E_ROOMS.STUDY}]
     }
 }
   
@@ -30,7 +33,13 @@ class App extends Component {
             <Col xs={2} className="App-header">
               <Sidebar/>
             </Col>
-            <Col xs={8}>
+            <Col xs={10}>
+                <Alert variant="dark">
+                  <Alert.Heading>
+                  Who's up:
+                  </Alert.Heading>
+                  Colonel Mustard to move
+                </Alert>
               <Board players={this.state.players}/>
             </Col>
           </Row>
