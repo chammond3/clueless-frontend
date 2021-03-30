@@ -13,7 +13,7 @@ class MoveButtons extends Component {
                         <Button>
                             Up
                         </Button>
-                        <Button>
+                        <Button onClick={() => this.props.downButton()}>
                             Down
                         </Button>
                         <Button>

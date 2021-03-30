@@ -3,6 +3,8 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+// to-do: replace all player.location with player.location.name
+// replace all 'player' with 'character'
 
 class Board extends Component {
 
@@ -21,7 +23,7 @@ class Board extends Component {
     }
 
     room(roomName) {
-        const playersInRoom = this.props.players.filter(player =>  player.location === roomName);
+        const playersInRoom = this.props.players.filter(player =>  player.location.name === roomName);
         const listOfPlayers = playersInRoom.map(player => player.name).join(", ");
         return (
             <Col className="Board-room">
@@ -46,7 +48,7 @@ class Board extends Component {
     } 
 
     rowHallways(hallway1, hallway2, hallway3) {
-        const playersInRoom1 = this.props.players.filter(player =>  player.location === hallway1);
+        const playersInRoom1 = this.props.players.filter(player =>  player.location.name === hallway1);
         const listOfPlayers1 = playersInRoom1.map(player => player.name).join(", ");
 
         const playersInRoom2 = this.props.players.filter(player =>  player.location === hallway2);
