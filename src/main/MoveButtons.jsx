@@ -10,19 +10,19 @@ class MoveButtons extends Component {
                 <h3>Movement</h3>
                 <Form>
                     <div>
-                        <Button>
+                        <Button  onClick={() => this.props.moveFunctions.moveUp()}>
                             Up
                         </Button>
-                        <Button onClick={() => this.props.downButton()}>
+                        <Button onClick={() => this.props.moveFunctions.moveDown()}>
                             Down
                         </Button>
-                        <Button>
+                        <Button onClick={() => this.props.moveFunctions.moveLeft()}>
                             Left
                         </Button>
-                        <Button>
+                        <Button onClick={() => this.props.moveFunctions.moveRight()}>
                             Right
                         </Button>
-                        <Button>
+                        <Button  onClick={() => this.props.moveFunctions.moveSecretPassage()}>
                             Sectret Passage!
                         </Button>
                     </div>

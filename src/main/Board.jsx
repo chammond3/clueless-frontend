@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { E_ROOMS } from './Const';
 
-// to-do: replace all player.location with player.location.name
+// to-do: replace text in render with enum
 // replace all 'player' with 'character'
 
 class Board extends Component {
 
     hallwayHorizontal(hallwayName) {
-        const playersInRoom = this.props.players.filter(player =>  player.location === hallwayName);
+        const playersInRoom = this.props.players.filter(player =>  player.location.name === hallwayName);
         const listOfPlayers = playersInRoom.map(player => player.name).join(", ");
         return (
         <Col>
@@ -51,10 +52,10 @@ class Board extends Component {
         const playersInRoom1 = this.props.players.filter(player =>  player.location.name === hallway1);
         const listOfPlayers1 = playersInRoom1.map(player => player.name).join(", ");
 
-        const playersInRoom2 = this.props.players.filter(player =>  player.location === hallway2);
+        const playersInRoom2 = this.props.players.filter(player =>  player.location.name === hallway2);
         const listOfPlayers2 = playersInRoom2.map(player => player.name).join(", ");
 
-        const playersInRoom3 = this.props.players.filter(player =>  player.location === hallway3);
+        const playersInRoom3 = this.props.players.filter(player =>  player.location.name === hallway3);
         const listOfPlayers3 = playersInRoom3.map(player => player.name).join(", ");
         return (
             <Row className="Board-row">
@@ -78,9 +79,9 @@ class Board extends Component {
     render() {
         return (
             <Container fluid className="Top-padding">
-                { this.rowRooms("Study", "hallway1", "Hall", "hallway2", "Lounge")}
+                { this.rowRooms(E_ROOMS.STUDY.name, "hallway1", "Hall", "hallway2", "Lounge")}
                 { this.rowHallways("hallway3", "hallway4", "hallway5") }
-                { this.rowRooms("Libarary", "hallway6", "Billiard Room", "hallway7", "Dining Room") }
+                { this.rowRooms("Library", "hallway6", "Billiard Room", "hallway7", "Dining Room") }
                 { this.rowHallways("hallway8", "hallway9", "hallway10") }
                 { this.rowRooms("Conservatory", "hallway11", "Ballroom", "hallway12", "Kitchen") }
             </Container>

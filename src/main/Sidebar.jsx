@@ -13,7 +13,7 @@ class Sidebar extends Component {
                     <SuggestForm/>
                 </Row>
                 <Row>
-                    <MoveButtons downButton={this.props.downButton}/>
+                    <MoveButtons moveFunctions={this.props.moveFunctions}/>
                 </Row>
                 <Row>
                     <Cards/>

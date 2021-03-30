@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Board from './main/Board';
 import Sidebar from "./main/Sidebar";
-import { E_ROOMS, E_CHARACTERS } from './main/Const';
+import { E_CHARACTERS, locationMap } from './main/Const';
 import Alert from 'react-bootstrap/Alert';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
@@ -25,25 +25,90 @@ class App extends Component {
 
   handleMoveDown() {
     const characters = this.state.characters.slice();
-    let newCharacters = characters.find((character, index) => {
+    characters.find((character, index) => {
       if (character.name === this.state.player.name) {
         const character = characters[index];
-        if (character.location.downSquare === "hallway3") {
-          character.location = E_ROOMS.HALLWAY3;
-        }
+        character.location = locationMap(character.location.downSquare);
         characters[index] = character;
         return true;
       }
+      return false;
     });
-
     // emit socket event
-
-    console.log(newCharacters);
-    console.log(characters);
     this.setState({characters: characters})
   }
+
+  handleMoveUp() {
+    const characters = this.state.characters.slice();
+    characters.find((character, index) => {
+      if (character.name === this.state.player.name) {
+        const character = characters[index];
+        character.location = locationMap(character.location.upSquare);
+        characters[index] = character;
+        return true;
+      }
+      return false;
+    });
+    // emit socket event
+    this.setState({characters: characters})
+  }
+
+  handleMoveLeft() {
+    const characters = this.state.characters.slice();
+    characters.find((character, index) => {
+      if (character.name === this.state.player.name) {
+        const character = characters[index];
+        character.location = locationMap(character.location.leftSquare);
+        characters[index] = character;
+        return true;
+      }
+      return false;
+    });
+    // emit socket event
+    this.setState({characters: characters})
+  }
+
+  handleMoveRight() {
+    const characters = this.state.characters.slice();
+    characters.find((character, index) => {
+      if (character.name === this.state.player.name) {
+        const character = characters[index];
+        character.location = locationMap(character.location.rightSquare);
+        characters[index] = character;
+        return true;
+      }
+      return false;
+    });
+    // emit socket event
+    this.setState({characters: characters})
+  }
+
+  handleMoveSecretPassage() {
+    const characters = this.state.characters.slice();
+    characters.find((character, index) => {
+      if (character.name === this.state.player.name) {
+        const character = characters[index];
+        character.location = locationMap(character.location.secretPassage);
+        characters[index] = character;
+        return true;
+      }
+      return false;
+    });
+    // emit socket event
+    this.setState({characters: characters})
+  }
+
   
   render() {
+
+    const movementFunctions = {
+      moveDown: () => this.handleMoveDown(),
+      moveUp: () => this.handleMoveUp(),
+      moveLeft: () => this.handleMoveLeft(),
+      moveRight: () => this.handleMoveRight(),
+      moveSecretPassage: () => this.handleMoveSecretPassage()
+    };
+
     return (
       <div className = "App">
         <Navbar bg="dark" variant="dark">
@@ -55,7 +120,7 @@ class App extends Component {
         <Container fluid>
           <Row>
             <Col xs={2} className="App-header">
-              <Sidebar downButton={() => this.handleMoveDown()}/>
+              <Sidebar moveFunctions={movementFunctions}/>
             </Col>
             <Col xs={10}>
                 <Alert variant="dark">
