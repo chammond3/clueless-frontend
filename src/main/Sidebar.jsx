@@ -13,10 +13,14 @@ class Sidebar extends Component {
                     <SuggestForm/>
                 </Row>
                 <Row>
-                    <MoveButtons moveFunctions={this.props.moveFunctions}/>
+                    <MoveButtons 
+                        moveFunctions={this.props.moveFunctions}
+                        player={this.props.player}    
+                        characters={this.props.characters}
+                    />
                 </Row>
                 <Row>
-                    <Cards/>
+                    <Cards cards={this.props.player.cards}/>
                 </Row>
             </Container>
         );

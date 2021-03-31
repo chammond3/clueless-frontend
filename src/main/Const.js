@@ -31,7 +31,7 @@ export const E_ROOMS = {
         type: "hallway",
         rightSquare: "Lounge",
         leftSquare: "Hall",
-        downSquare: "hallway5",
+        downSquare: null,
         upSquare: null,
         secretPassage: null
     },
@@ -42,7 +42,7 @@ export const E_ROOMS = {
         leftSquare: "hallway2",
         downSquare: "hallway5",
         upSquare: null,
-        secretPassage: null
+        secretPassage: "Conservatory"
     },
     HALLWAY3: {
         name: "hallway3",
@@ -150,7 +150,7 @@ export const E_ROOMS = {
         leftSquare: null,
         downSquare: null,
         upSquare: "hallway8",
-        secretPassage: null
+        secretPassage: "Lounge"
     },
     HALLWAY11: {
         name: "hallway11",
@@ -191,13 +191,106 @@ export const E_ROOMS = {
 
 };
 
+export const E_WEAPONS = {
+    ROPE: "Rope",
+    PIPE: "Pipe",
+    KNIFE: "Knife",
+    WRENCH: "Wrench",
+    CANDLESTICK: "Candlestick",
+    REVOLVER: "Revolver"
+}
+
 export const E_CHARACTERS = {
     COLONEL: {
-        name: "Colonel", location: E_ROOMS.STUDY
+        name: "Colonel Mustard", location: E_ROOMS.HALLWAY5
     },
     PEACOCK: {
-        name: "Peacock", location: E_ROOMS.KITCHEN
+        name: "Mrs. Peacock", location: E_ROOMS.HALLWAY8
+    },
+    GREEN: {
+        name: "Reverend Green", location: E_ROOMS.HALLWAY11
+    },
+    PLUM: {
+        name: "Professor Plum", location: E_ROOMS.HALLWAY3
+    },
+    SCARLET: {
+        name: "Miss Scarlet", location: E_ROOMS.HALLWAY2
+    },
+    WHITE: {
+        name: "Mrs. White", location: E_ROOMS.HALLWAY12
     }
+}
+
+export const E_CARDS = {
+    COLONEL: {
+        name: E_CHARACTERS.COLONEL.name, type: "character"
+    },
+    PEACOCK: {
+        name: E_CHARACTERS.PEACOCK.name, type: "character"
+    },
+    GREEN: {
+        name: E_CHARACTERS.GREEN.name, type: "character"
+    },
+    PLUM: {
+        name: E_CHARACTERS.PLUM.name, type: "character"
+    },
+    SCARLET: {
+        name: E_CHARACTERS.SCARLET.name, type: "character"
+    },
+    WHITE: {
+        name: E_CHARACTERS.WHITE.name, type: "character"
+    },
+    STUDY: {
+        name: E_ROOMS.STUDY.name, type: "room"
+    },
+    HALL: {
+        name: E_ROOMS.HALL.name, type: "room"
+    },
+    LOUNGE: {
+        name: E_ROOMS.LOUNGE.name, type: "room"
+    },
+    LIBRARY: {
+        name: E_ROOMS.LIBRARY.name, type: "room"
+    },
+    BILLIARDROOM: {
+        name: E_ROOMS.BILLIARDROOM.name, type: "room"
+    },
+    DININGROOM: {
+        name: E_ROOMS.DININGROOM.name, type: "room"
+    },
+    CONSERVATORY: {
+        name: E_ROOMS.CONSERVATORY.name, type: "room"
+    },
+    BALLROOM: {
+        name: E_ROOMS.BALLROOM.name, type: "room"
+    },
+    KITCHEN: {
+        name: E_ROOMS.KITCHEN.name, type: "room"
+    },
+    ROPE: { 
+        name: E_WEAPONS.ROPE, type: "weapon"
+    },
+    PIPE: {
+        name: E_WEAPONS.PIPE, type: "weapon"
+    },
+    KNIFE: {
+        name: E_WEAPONS.KNIFE, type: "weapon"
+    },
+    WRENCH: {
+        name: E_WEAPONS.WRENCH, type: "weapon"
+    },
+    CANDLESTICK: {
+        name: E_WEAPONS.CANDLESTICK, type: "weapon"
+    },
+    REVOLVER: {
+        name: E_WEAPONS.REVOLVER, type: "weapon"
+    }
+}
+
+export const E_TURNACTIONS = {
+    MOVE: "move",
+    ACCUSE: "accuse",
+    REFUTE: "refute"
 }
 
 export function locationMap(location) {
@@ -264,5 +357,5 @@ export function locationMap(location) {
     if (location === "Kitchen") {
         return E_ROOMS.KITCHEN;
     }
-
 }
+
