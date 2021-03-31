@@ -8,21 +8,22 @@ class SuggestForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            player: "",
-            room: "",
+            character: "",
             weapon: ""
         }
     }
 
-    onPlayerChange = (event) => {
-        this.setState({player: event.target.value})
+    onCharacterChange = (event) => {
+        this.setState({character: event.target.value})
     }
 
     onWeaponChange = (event) => {
-        this.setState({player: event.target.value})
+        this.setState({weapon: event.target.value})
     }
 
     render () {
+
+        const hideButton = (this.props.player.turn === true && (this.props.player.turnState === "move" || this.props.player.turnState === "accuse")) ? false : true;
 
         // create dropdown list of characters
         const playerOptions = Object.values(E_CHARACTERS).map(character => {
@@ -48,7 +49,7 @@ class SuggestForm extends Component {
                 <Form>
                     <Form.Group controlId="exampleForm.ControlSelect1">
                         <Form.Label>Player who did it:</Form.Label>
-                        <Form.Control as="select" onChange={this.onPlayerChange}>
+                        <Form.Control as="select" onChange={this.onCharacterChange}>
                             {playerOptions}
                         </Form.Control>
                         <Form.Label>With this weapon:</Form.Label>
@@ -56,10 +57,10 @@ class SuggestForm extends Component {
                             {weaponOptions}
                         </Form.Control>
                     </Form.Group>
-                    <Button>
+                    <Button disabled={hideButton} onClick={() => this.props.suggestFunction(this.state.character, this.state.weapon)}>
                         Suggest
                     </Button>
-                    <Button>
+                    <Button disabled={hideButton} onClick={() => this.props.accuseFunction(this.state.character, this.state.weapon)}>
                         Accuse
                     </Button>
                 </Form>

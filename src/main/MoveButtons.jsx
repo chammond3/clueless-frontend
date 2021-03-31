@@ -8,8 +8,6 @@ class MoveButtons extends Component {
     
     hideButton(characters, direction) {
         // check if current turn and the action is to move
-        console.log(this.props.player.turnState);
-        console.log(E_TURNACTIONS.MOVE);
         if (this.props.player.turn === false || this.props.player.turnState !== E_TURNACTIONS.MOVE) {
             return true;
         }

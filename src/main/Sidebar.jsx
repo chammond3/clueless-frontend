@@ -10,7 +10,11 @@ class Sidebar extends Component {
         return (
             <Container>
                 <Row>
-                    <SuggestForm/>
+                    <SuggestForm
+                        suggestFunction={this.props.suggestFunction}
+                        accuseFunction={this.props.accuseFunction}
+                        player={this.props.player}
+                    />
                 </Row>
                 <Row>
                     <MoveButtons 
@@ -20,7 +24,11 @@ class Sidebar extends Component {
                     />
                 </Row>
                 <Row>
-                    <Cards cards={this.props.player.cards}/>
+                    <Cards 
+                        cards={this.props.player.cards}
+                        refuteFunction={this.props.refuteFunction}
+                        player={this.props.player}
+                    />
                 </Row>
             </Container>
         );

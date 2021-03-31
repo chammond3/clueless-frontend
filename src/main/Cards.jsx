@@ -26,6 +26,8 @@ class Cards extends Component {
             );
         });
 
+        const hideButton = (this.props.player.turn === true && this.props.player.turnState === "refute") ? false : true;
+
         return (
             <Container className="Top-padding">
                 <h3>Cards</h3>
@@ -35,11 +37,8 @@ class Cards extends Component {
                             {cardOptions}
                         </Form.Control>
                     </Form.Group>
-                    <Button>
+                    <Button disabled={hideButton} onClick={() => this.props.refuteFunction(this.state.card)}>
                         Refute!
-                    </Button>
-                    <Button>
-                        Can't refute
                     </Button>
                 </Form>
             </Container>

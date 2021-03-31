@@ -202,22 +202,22 @@ export const E_WEAPONS = {
 
 export const E_CHARACTERS = {
     COLONEL: {
-        name: "Colonel Mustard", location: E_ROOMS.HALLWAY5
+        name: "Colonel Mustard", location: E_ROOMS.HALLWAY5, taken: false
     },
     PEACOCK: {
-        name: "Mrs. Peacock", location: E_ROOMS.HALLWAY8
+        name: "Mrs. Peacock", location: E_ROOMS.HALLWAY8, taken: false
     },
     GREEN: {
-        name: "Reverend Green", location: E_ROOMS.HALLWAY11
+        name: "Reverend Green", location: E_ROOMS.HALLWAY11, taken: false
     },
     PLUM: {
-        name: "Professor Plum", location: E_ROOMS.HALLWAY3
+        name: "Professor Plum", location: E_ROOMS.HALLWAY3, taken: false
     },
     SCARLET: {
-        name: "Miss Scarlet", location: E_ROOMS.HALLWAY2
+        name: "Miss Scarlet", location: E_ROOMS.HALLWAY2, taken: false
     },
     WHITE: {
-        name: "Mrs. White", location: E_ROOMS.HALLWAY12
+        name: "Mrs. White", location: E_ROOMS.HALLWAY12, taken: false
     }
 }
 
