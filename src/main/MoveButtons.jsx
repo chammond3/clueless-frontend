@@ -1,17 +1,28 @@
 import { Component } from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/esm/Container";
-import Form from "react-bootstrap/Form"
+import Form from "react-bootstrap/Form";
 import { E_TURNACTIONS } from "./Const";
 
+const io = require('socket.io-client');
+
 class MoveButtons extends Component {
-    
+    componentDidMount(){
+        this.socket = io();
+    }
+
     hideButton(characters, direction) {
         // check if current turn and the action is to move
         if (this.props.player.turn === false || this.props.player.turnState !== E_TURNACTIONS.MOVE) {
             return true;
         }
         
+        // No character linked yet
+        if (this.props.player.name === "")
+        {
+            return true;
+        }
+
         const playerLocation = characters.find(character =>  character.name === this.props.player.name).location;        
         if (playerLocation[direction] === null) {
             return true;
@@ -32,8 +43,6 @@ class MoveButtons extends Component {
     }
     
     render () {
-        
-
         const showUpButton = this.hideButton(this.props.characters, "upSquare");
         const showDownButton = this.hideButton(this.props.characters, "downSquare");
         const showLeftButton = this.hideButton(this.props.characters, "leftSquare");
@@ -45,7 +54,7 @@ class MoveButtons extends Component {
                 <h3>Movement</h3>
                 <Form>
                     <div>
-                        <Button  disabled={showUpButton} onClick={() => this.props.moveFunctions.moveUp()}>
+                        <Button disabled={showUpButton} onClick={() => this.props.moveFunctions.moveUp()}>
                             Up
                         </Button>
                         <Button disabled={showDownButton} onClick={() => this.props.moveFunctions.moveDown()}>
@@ -58,7 +67,7 @@ class MoveButtons extends Component {
                             Right
                         </Button>
                         <Button disabled={showSecretPassageButton} onClick={() => this.props.moveFunctions.moveSecretPassage()}>
-                            Sectret Passage!
+                            Secret Passage!
                         </Button>
                     </div>
                 </Form>

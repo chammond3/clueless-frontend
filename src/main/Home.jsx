@@ -10,6 +10,7 @@ import { E_CHARACTERS, E_CARDS, E_TURNACTIONS, locationMap } from './Const';
 import Alert from 'react-bootstrap/Alert';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
+const io = require('socket.io-client');
 
 const ENDPOINT = 'https://clueless-app1.herokuapp.com';
 
@@ -23,12 +24,13 @@ class Home extends Component {
     this.state = {
         characters: charactersArray,
         player: {
-          cards: [E_CARDS.SCARLET, E_CARDS.ROPE, E_CARDS.STUDY],
-          name: E_CHARACTERS.COLONEL.name,
-          turn: true, // is the current client able to move
-          turnState: E_TURNACTIONS.MOVE // move, accuse, refute 
+          //cards: new Array,
+          cards: new Array,
+          name: "",
+          turn: false, // is the current client able to move
+          turnState: "" // move, accuse, refute 
         },
-        gameMessage: "Colonel to move"
+        gameMessage: ""
     }
   }
     playerSuggest = (character, weapon) => {
@@ -62,28 +64,42 @@ class Home extends Component {
     }
 
     // socket callback when turn changes on server
-    handleTurnChange = data => {
+    handleTurnChange = (character, turnState) => {
       // will see if the character == player and then update with the next turn logic
-      const character = data.character;
-      const turnAction = data.turnAction;
-      if (character.name === this.state.player.name) {
-        const player = this.state.player;
-        player.turn = true;
-        player.turnAction = turnAction;
-        this.setState({player: player});
+      let newMessage = "";
+      if(character == null){
+        newMessage = "No characters in turn order";
+      }
+      else{
+        newMessage = character.name + " to " +  turnState;
+        this.setState({gameMessage: newMessage});
+        if (character.name === this.state.player.name) {
+          const player = this.state.player;
+          player.turn = true;
+          player.turnState = turnState;
+          this.setState({player: player});
+        }
+        else{
+          const player = this.state.player;
+          player.turn = false;
+          player.turnState = turnState;
+          this.setState({player: player});
+        }
       }
     }
 
     // socket call back when character state updates on client (location)
     handleUpdateCharacter = characters => {
-      this.setState({characters: characters});
+      this.setState({characters: characters})
     }
 
     // socket callback to set the player's cards
-    handleDealCards = cards => {
-      const player = this.state.player;
-      player.cards = cards;
-      this.setState({player: player});
+    handleDealCards = (cardName, character) => {
+      if (character.name === this.state.player.name) {
+        const player = this.state.player;
+        player.cards.push(cardName);
+        this.setState({player: player});
+      }
     }
 
     // socket callback updates game message
@@ -92,25 +108,46 @@ class Home extends Component {
     }
 
     componentDidMount() {
+      this.socket = io();
       // start listener for retrieving data
       socket.on("turnChange", this.handleTurnChange);
       socket.on("updateCharacters", this.handleUpdateCharacter);
-      socket.on("dealCards", this.handleDealCards);
+      socket.on("dealCard", this.handleDealCards);
       socket.on("updateMessage", this.handleMessageUpdate);
-      socket.emit("initialData");
+      socket.emit("initialData", this.state);
     }
 
     componentWillUnmount() {
       socket.off("turnChange", this.handleTurnChange);
       socket.off("updateCharacters", this.handleUpdateCharacter);
-      socket.off("dealCards", this.handleDealCards);
+      socket.off("dealCard", this.handleDealCards);
       socket.off("updateMessage", this.handleMessageUpdate);
     }
 
     render() {
 
       const playerOptions = Object.values(E_CHARACTERS).map(character => {
-        if (character.taken === true)
+        console.log("player options");
+        let taken = false;
+        let characters = this.state.characters;
+
+        characters.find((checkCharacter, index) => {
+          if (checkCharacter.name === character.name) {
+            const character = characters[index];
+            if(character.taken)
+            {
+              taken = true;
+            }
+            else
+            {
+              taken = false;
+            }
+            return true;
+          }
+          return false;
+        });
+
+        if (taken === true)
         {
           return (
             <NavDropdown.Item disabled eventKey={character.name}>{character.name}</NavDropdown.Item>
@@ -119,7 +156,6 @@ class Home extends Component {
           return (
             <NavDropdown.Item eventKey={character.name}>{character.name}</NavDropdown.Item>
           );
-        
         }
       });
 
@@ -166,7 +202,7 @@ class Home extends Component {
         //  - reset game board on client
         //  - deal cards
         //  - reset case file
-        socket.emit("startGame");
+        socket.emit("startGame", this.state);
 
         this.setState({characters: charactersArray});
       }
