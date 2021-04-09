@@ -26,19 +26,24 @@ class Cards extends Component {
             );
         });
 
-        const hideButton = (this.props.player.turn === true && this.props.player.turnState === "refute") ? false : true;
+        const hideButtonRefute = (this.props.player.turn === true && this.props.player.turnState === "refute" && this.state.card !== "Choose card..." && this.state.card !== "") ? false : true;
+        const hideButtonCantRefute = (this.props.player.turn === true && this.props.player.turnState === "refute") ? false : true;
 
         return (
             <Container className="Top-padding">
                 <h3>Cards</h3>
                 <Form>
                     <Form.Group controlId="exampleForm.ControlSelect1">
-                        <Form.Control as="select" onChange={this.onCardChange}>
+                        <Form.Control as="select" onChange={this.onCardChange} defaultValue="Select card...">
+                            <option>Select card...</option>
                             {cardOptions}
                         </Form.Control>
                     </Form.Group>
-                    <Button disabled={hideButton} onClick={() => this.props.refuteFunction(this.state.card)}>
+                    <Button disabled={hideButtonRefute} onClick={() => this.props.refuteFunction(this.state.card)}>
                         Refute!
+                    </Button>
+                    <Button disabled={hideButtonCantRefute} onClick={() => this.props.refuteFunction()}>
+                        Can't refute
                     </Button>
                 </Form>
             </Container>

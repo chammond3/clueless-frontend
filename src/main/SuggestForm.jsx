@@ -23,7 +23,7 @@ class SuggestForm extends Component {
 
     render () {
 
-        const hideButton = (this.props.player.turn === true && (this.props.player.turnState === "move" || this.props.player.turnState === "accuse")) ? false : true;
+        const hideButton = (this.props.player.turn === true && (this.props.player.turnState === "move" || this.props.player.turnState === "accuse" ) && this.state.character !== "Select..." && this.state.character !== "" && this.state.weapon !== "Select..." && this.state.weapon !== "") ? false : true;
 
         // create dropdown list of characters
         const playerOptions = Object.values(E_CHARACTERS).map(character => {
@@ -50,10 +50,12 @@ class SuggestForm extends Component {
                     <Form.Group controlId="exampleForm.ControlSelect1">
                         <Form.Label>Player who did it:</Form.Label>
                         <Form.Control as="select" onChange={this.onCharacterChange}>
+                            <option>Select...</option>
                             {playerOptions}
                         </Form.Control>
                         <Form.Label>With this weapon:</Form.Label>
                         <Form.Control as="select" onChange={this.onWeaponChange}>
+                            <option>Select...</option>
                             {weaponOptions}
                         </Form.Control>
                     </Form.Group>
