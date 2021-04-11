@@ -21,10 +21,9 @@ class SuggestForm extends Component {
         this.setState({weapon: event.target.value})
     }
 
-    shouldHideButton = () => {
+    shouldHideSuggestButton = () => {
         const player = this.props.characters.find(character =>  character.name === this.props.player.name);
         
-        console.log(player);
         if (player === undefined) {
             return true;
         }
@@ -44,11 +43,32 @@ class SuggestForm extends Component {
         return false;
     }
 
+    shouldHideAccuseButton = () => {
+        const player = this.props.characters.find(character =>  character.name === this.props.player.name);
+        
+        if (player === undefined) {
+            return true;
+        }
+        if (player.location.type === "hallway") {
+            return true;
+        }
+        if (this.props.player.turn !== true) {
+            return true;
+        }
+        if (this.props.player.turnState !== "accuse") {
+            return true;
+        } 
+        if (this.state.character === "Select..." || this.state.character === "" || this.state.weapon === "Select..." || this.state.weapon === "") {
+            return true;
+        }
+        return false;
+    }
+
     render () {
 
 
-        const hideButton = this.shouldHideButton()
-
+        const hideSuggestButton = this.shouldHideSuggestButton();
+        const hideAccuseButton = this.shouldHideAccuseButton();
         const hideButtonEndTurn = (this.props.player.turn === true && this.props.player.turnState !== "refute") ? false : true;
 
         // create dropdown list of characters
@@ -85,10 +105,10 @@ class SuggestForm extends Component {
                             {weaponOptions}
                         </Form.Control>
                     </Form.Group>
-                    <Button disabled={hideButton} onClick={() => this.props.suggestFunction(this.state.character, this.state.weapon)}>
+                    <Button disabled={hideSuggestButton} onClick={() => this.props.suggestFunction(this.state.character, this.state.weapon)}>
                         Suggest
                     </Button>
-                    <Button disabled={hideButton} onClick={() => this.props.accuseFunction(this.state.character, this.state.weapon)}>
+                    <Button disabled={hideAccuseButton} onClick={() => this.props.accuseFunction(this.state.character, this.state.weapon)}>
                         Accuse
                     </Button>
                     <Button disabled={hideButtonEndTurn} onClick={() => this.props.endTurnFunction()}>
