@@ -13,7 +13,9 @@ class Sidebar extends Component {
                     <SuggestForm
                         suggestFunction={this.props.suggestFunction}
                         accuseFunction={this.props.accuseFunction}
+                        endTurnFunction={this.props.endTurnFunction}
                         player={this.props.player}
+                        characters={this.props.characters}
                     />
                 </Row>
                 <Row>

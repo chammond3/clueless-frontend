@@ -289,6 +289,7 @@ export const E_CARDS = {
 
 export const E_TURNACTIONS = {
     MOVE: "move",
+    SUGGEST: "suggest",
     ACCUSE: "accuse",
     REFUTE: "refute"
 }

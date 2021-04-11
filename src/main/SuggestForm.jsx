@@ -21,9 +21,34 @@ class SuggestForm extends Component {
         this.setState({weapon: event.target.value})
     }
 
+    shouldHideButton = () => {
+        const player = this.props.characters.find(character =>  character.name === this.props.player.name);
+        
+        console.log(player);
+        if (player === undefined) {
+            return true;
+        }
+        if (player.location.type === "hallway") {
+            return true;
+        }
+        if (this.props.player.turn !== true) {
+            return true;
+        }
+        if (this.props.player.turnState !== "move" && this.props.player.turnState !== "accuse" ) {
+            return true;
+        } 
+        if (this.state.character === "Select..." || this.state.character === "" || this.state.weapon === "Select..." || this.state.weapon === "") {
+            return true;
+        }
+        return false;
+    }
+
     render () {
 
-        const hideButton = (this.props.player.turn === true && (this.props.player.turnState === "move" || this.props.player.turnState === "accuse" ) && this.state.character !== "Select..." && this.state.character !== "" && this.state.weapon !== "Select..." && this.state.weapon !== "") ? false : true;
+
+        const hideButton = this.shouldHideButton()
+
+        const hideButtonEndTurn = (this.props.player.turn === true && this.props.player.turnState !== "refute") ? false : true;
 
         // create dropdown list of characters
         const playerOptions = Object.values(E_CHARACTERS).map(character => {
@@ -64,6 +89,9 @@ class SuggestForm extends Component {
                     </Button>
                     <Button disabled={hideButton} onClick={() => this.props.accuseFunction(this.state.character, this.state.weapon)}>
                         Accuse
+                    </Button>
+                    <Button disabled={hideButtonEndTurn} onClick={() => this.props.endTurnFunction()}>
+                        End turn
                     </Button>
                 </Form>
             </Container>
