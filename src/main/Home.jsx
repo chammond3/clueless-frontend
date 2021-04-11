@@ -68,16 +68,16 @@ class Home extends Component {
     }
 
     // socket callback when turn changes on server
-    handleTurnChange = (character, turnState, newMessage) => {
+    handleTurnChange = (characterName, turnState, newMessage) => {
       // will see if the character == player and then update with the next turn logic
       this.setState({gameMessage: newMessage});
-      if (character === null) {
+      if (characterName === null) {
         const player = this.state.player;
         player.turn = false;
         this.setState({player: player});
       }
       else {
-        if (character.name === this.state.player.name) {
+        if (characterName === this.state.player.name) {
           const player = this.state.player;
           player.turn = true;
           player.turnState = turnState;
@@ -100,8 +100,8 @@ class Home extends Component {
     }
 
     // socket callback to set the player's cards
-    handleDealCards = (cardName, character) => {
-      if (character.name === this.state.player.name) {
+    handleDealCards = (cardName, characterName) => {
+      if (characterName === this.state.player.name) {
         const player = this.state.player;
         player.cards.push(cardName);
         this.setState({player: player});

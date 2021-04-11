@@ -32,9 +32,10 @@ class SuggestForm extends Component {
             return true;
         }
         if (this.props.player.turn !== true) {
+
             return true;
         }
-        if (this.props.player.turnState !== "move" && this.props.player.turnState !== "accuse" ) {
+        if (this.props.player.turnState !== "move" && this.props.player.turnState !== "suggest") {
             return true;
         } 
         if (this.state.character === "Select..." || this.state.character === "" || this.state.weapon === "Select..." || this.state.weapon === "") {
