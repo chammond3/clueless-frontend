@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import SuggestForm from "./SuggestForm";
 import MoveButtons from "./MoveButtons";
 import Cards from "./Cards";
+import Notes from "./Notes";
 
 class Sidebar extends Component {
     render() {
@@ -31,6 +32,9 @@ class Sidebar extends Component {
                         refuteFunction={this.props.refuteFunction}
                         player={this.props.player}
                     />
+                </Row>
+                <Row>
+                    <Notes/>
                 </Row>
             </Container>
         );

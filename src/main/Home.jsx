@@ -236,7 +236,7 @@ class Home extends Component {
         </Navbar>
         <Container fluid>
           <Row>
-            <Col xs={2} className="App-header">
+            <Col xs={3} className="App-header">
               <Sidebar 
                 moveFunctions={movementFunctions}
                 suggestFunction={this.playerSuggest}
@@ -247,7 +247,7 @@ class Home extends Component {
                 characters={this.state.characters}
               />
             </Col>
-            <Col xs={10}>
+            <Col xs={9}>
                 <Alert variant="dark">
                   <Alert.Heading>
                     {this.state.gameMessage}
