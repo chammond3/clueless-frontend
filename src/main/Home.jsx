@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col';
 import Board from './Board';
 import Sidebar from "./Sidebar";
 import { E_CHARACTERS, locationMap } from './Const';
-import Alert from 'react-bootstrap/Alert';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 const io = require('socket.io-client');
@@ -247,12 +246,10 @@ class Home extends Component {
                 characters={this.state.characters}
               />
             </Col>
-            <Col xs={9}>
-                <Alert variant="dark">
-                  <Alert.Heading>
+            <Col xs={9} className="Board-background">
+                <h3 className="Board-message">
                     {this.state.gameMessage}
-                  </Alert.Heading>
-                </Alert>
+                </h3>
               <Board players={this.state.characters}/>
             </Col>
           </Row>

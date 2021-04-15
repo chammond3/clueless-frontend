@@ -2,16 +2,42 @@ import React, { Component } from "react";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { E_ROOMS } from './Const';
-
-// to-do: replace text in render with enum
-// replace all 'player' with 'character'
+import { E_ROOMS, E_CHARACTERS } from './Const';
+// images pulled from https://www.ultraboardgames.com/clue/characters-and-weapons.php
+import peacock from "../img/peacock.png";
+import mustard from "../img/mustard.png";
+import green from "../img/green.png";
+import plum from "../img/plum.png";
+import scarlet from "../img/scarlet.png";
+import white from "../img/white.png";
 
 class Board extends Component {
 
+    imageMap(character) {
+        if (character.name === E_CHARACTERS.COLONEL.name) {
+            return mustard;
+        }
+        if (character.name === E_CHARACTERS.PEACOCK.name) {
+            return peacock;
+        }
+        if (character.name === E_CHARACTERS.GREEN.name) {
+            return green;
+        }
+        if (character.name === E_CHARACTERS.PLUM.name) {
+            return plum;
+        }
+        if (character.name === E_CHARACTERS.SCARLET.name) {
+            return scarlet;
+        }
+        if (character.name === E_CHARACTERS.WHITE.name) {
+            return white;
+        }
+    }
+
     hallwayHorizontal(hallwayName) {
         const playersInRoom = this.props.players.filter(player =>  player.location.name === hallwayName);
-        const listOfPlayers = playersInRoom.map(player => player.name).join(", ");
+        const listOfPlayers = playersInRoom.map(player => <img src={this.imageMap(player)} alt="" height="55" width="45" className="img-center"/>);
+        console.log(listOfPlayers);
         return (
         <Col>
             <Row className="Board-hallway-horizontal"></Row>
@@ -25,13 +51,15 @@ class Board extends Component {
 
     room(roomName) {
         const playersInRoom = this.props.players.filter(player =>  player.location.name === roomName);
-        const listOfPlayers = playersInRoom.map(player => player.name).join(", ");
+        const listOfPlayers = playersInRoom.map(player => <img src={this.imageMap(player)} alt="" height="55" width="45" />);
+        const className = "Board-".concat(roomName.split(" ").join(""));
         return (
-            <Col className="Board-room">
-                <h3>
+            <Col className={className}>
+                <h3 className="Board-room-name">
                     { roomName }
                 </h3>
                 {listOfPlayers}
+                
             </Col>
         );
     }
@@ -50,13 +78,13 @@ class Board extends Component {
 
     rowHallways(hallway1, hallway2, hallway3) {
         const playersInRoom1 = this.props.players.filter(player =>  player.location.name === hallway1);
-        const listOfPlayers1 = playersInRoom1.map(player => player.name).join(", ");
+        const listOfPlayers1 = playersInRoom1.map(player => <img src={this.imageMap(player)} alt="" height="55" width="45" className="img-center"/>);
 
         const playersInRoom2 = this.props.players.filter(player =>  player.location.name === hallway2);
-        const listOfPlayers2 = playersInRoom2.map(player => player.name).join(", ");
+        const listOfPlayers2 = playersInRoom2.map(player => <img src={this.imageMap(player)} alt="" height="55" width="45" className="img-center"/>);
 
         const playersInRoom3 = this.props.players.filter(player =>  player.location.name === hallway3);
-        const listOfPlayers3 = playersInRoom3.map(player => player.name).join(", ");
+        const listOfPlayers3 = playersInRoom3.map(player => <img src={this.imageMap(player)} alt="" height="55" width="45" className="img-center"/>);
         return (
             <Row className="Board-row">
                 <Col/>
