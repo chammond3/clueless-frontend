@@ -10,8 +10,8 @@ import { E_CHARACTERS, locationMap } from './Const';
 import Button from 'react-bootstrap/Button';
 const io = require('socket.io-client');
 
-//const ENDPOINT = 'https://clueless-app1.herokuapp.com';
-const ENDPOINT = 'http://localhost:3001';
+const ENDPOINT = 'https://clueless-app1.herokuapp.com';
+//const ENDPOINT = 'http://localhost:3001';
 const socket = openSocket(ENDPOINT, {transports: ['websocket']});
 
 class Game extends Component {

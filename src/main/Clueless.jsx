@@ -3,8 +3,8 @@ import Game from './Game';
 import Lobby from './Lobby';
 import openSocket from "socket.io-client";
 
-//const ENDPOINT = 'https://clueless-app1.herokuapp.com';
-const ENDPOINT = 'http://localhost:3001';
+const ENDPOINT = 'https://clueless-app1.herokuapp.com';
+//const ENDPOINT = 'http://localhost:3001';
 const socket = openSocket(ENDPOINT, {transports: ['websocket']});
 
 
