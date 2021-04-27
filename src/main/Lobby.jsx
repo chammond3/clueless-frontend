@@ -121,7 +121,7 @@ class Lobby extends Component {
                         </Col>
                         <Col xs={2}>
                             <Row className="Top-padding-large"/>   
-                            <Button disabled={startDisabled} variant="success" onClick={() => this.props.handleGameStart("started")}>
+                            <Button size="lg" disabled={startDisabled} variant="success" onClick={() => this.props.handleGameStart("started")}>
                                 Start Game!
                             </Button>
                         </Col>
