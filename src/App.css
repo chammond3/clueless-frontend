@@ -2,6 +2,10 @@
   padding-top: 10px;
 }
 
+.Top-padding-large {
+  padding-top: 50px;
+}
+
 .Board-room {
   border-style: solid; 
 }

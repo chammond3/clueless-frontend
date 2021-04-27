@@ -37,7 +37,6 @@ class Board extends Component {
     hallwayHorizontal(hallwayName) {
         const playersInRoom = this.props.players.filter(player =>  player.location.name === hallwayName);
         const listOfPlayers = playersInRoom.map(player => <img src={this.imageMap(player)} alt="" height="55" width="45" className="img-center"/>);
-        console.log(listOfPlayers);
         return (
         <Col>
             <Row className="Board-hallway-horizontal"></Row>
