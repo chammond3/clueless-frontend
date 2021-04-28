@@ -1,5 +1,7 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import Container from "react-bootstrap/Container";
+import Navbar from 'react-bootstrap/Navbar';
+import { E_CHARACTERS } from './Const';
 import Row from "react-bootstrap/Row";
 import SuggestForm from "./SuggestForm";
 import MoveButtons from "./MoveButtons";
@@ -11,6 +13,9 @@ import { CometChatUI } from "./cometchat-pro-react-ui-kit/CometChatWorkspace/src
 
 const appID = "319644fb8ab90c2";
 const region = "us";
+
+
+
 const appSetting = new CometChat.AppSettingsBuilder().subscribePresenceForAllUsers().setRegion(region).build();
 CometChat.init(appID, appSetting).then(
   () => {
@@ -23,20 +28,50 @@ CometChat.init(appID, appSetting).then(
   }
 );
 
-const authKey = "70f3097840cbc14022dad45cc692962f56107a9c";
-const uid = "SUPERHERO1";
+  const authKey = "70f3097840cbc14022dad45cc692962f56107a9c";
+  
 
-CometChat.login(uid, authKey).then(
-  user => {
-    console.log("Login Successful:", { user });    
-  },
-  error => {
-    console.log("Login failed with exception:", { error });    
-  }
-);
+  
+  
+  
+  
+
+  
 
 class Sidebar extends Component {
-    render() {
+  
+  render() {
+
+  let uid = "";
+
+  if ( this.props.player.name === E_CHARACTERS.SCARLET.name) {
+    uid = "SUPERHERO1"};
+
+  if ( this.props.player.name === E_CHARACTERS.GREEN.name) {
+    uid = "SUPERHERO2"};
+
+  if ( this.props.player.name === E_CHARACTERS.PEACOCK.name) {
+    uid = "SUPERHERO3"};
+
+  if ( this.props.player.name === E_CHARACTERS.COLONEL.name) {
+    uid = "SUPERHERO4"};
+
+  if ( this.props.player.name === E_CHARACTERS.PLUM.name) {
+    uid = "SUPERHERO5"};
+
+            if ( this.props.player.name === E_CHARACTERS.WHITE.name) {
+              uid = "SUPERHERO6"};
+
+
+    CometChat.login(uid, authKey).then(
+      user => {
+      console.log("Login Successful:", { user });    
+      },
+      error => {
+      console.log("Login failed with exception:", { error });    
+      }
+      );
+    
         return (
             <Container>
                 <Row>
@@ -65,9 +100,24 @@ class Sidebar extends Component {
                 <Row>
                     <Notes/>
                 </Row>
+      
+                <h1> </h1>
+                <Navbar bg="dark" variant="dark">
+                <Navbar.Brand>Chat with other players</Navbar.Brand>
+                 <Navbar.Collapse className="justify-content-end">
+                <Navbar.Text>Playing as: {this.props.player.name}</Navbar.Text>
+           
+               </Navbar.Collapse>
+               </Navbar>
+
+               
+              
+            
+
                 <div style={{width: '600px', height:'600px' }}>
                  <CometChatUI />
                 </div>
+                
             </Container>
         );
     }
