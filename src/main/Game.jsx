@@ -66,14 +66,14 @@ class Game extends Component {
     }
 
     // socket callback when turn changes on server
-    handleTurnChange = (characterName, turnState, newMessage, gameID) => {
+    handleTurnChange = (characterName, turnState, newMessage, gameID, privateMessage) => {
       if (gameID === this.props.gameID) {
       // will see if the character == player and then update with the next turn logic
-        this.setState({gameMessage: newMessage});
-        if (characterName === null) {
+        if (characterName === null) { // game is over
           const player = this.state.player;
           player.turn = false;
           this.setState({player: player});
+          this.setState({gameMessage: newMessage});
         }
         else {
           if (characterName === this.state.player.name) {
@@ -81,12 +81,20 @@ class Game extends Component {
             player.turn = true;
             player.turnState = turnState;
             this.setState({player: player});
+            console.log(privateMessage);
+            if (privateMessage === undefined) {
+              this.setState({gameMessage: newMessage});
+            }
+            else {
+              this.setState({gameMessage: privateMessage}); // update message sent only to player's who's turn it is (for viewing refuting cards)
+            }
           }
           else{
             const player = this.state.player;
             player.turn = false;
             player.turnState = turnState;
             this.setState({player: player});
+            this.setState({gameMessage: newMessage});
           }
         }
       }
