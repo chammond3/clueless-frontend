@@ -71,12 +71,20 @@ class Lobby extends Component {
         const startDisabled = (this.props.gameID === "" || this.props.player === "") ? true : false;
 
         return (
+            
             <React.Fragment>
+                
                 <Navbar bg="dark" variant="dark">
-                <Navbar.Brand>Clue-less App</Navbar.Brand>
+                <Navbar.Brand>Clue-less App Lobby</Navbar.Brand>
                     
                 </Navbar>
                 <Container fluid>
+                <div style={{ 
+                    backgroundImage: `url("https://www.marmaladegamestudio.com/wp-content/uploads/2020/03/news-article-cluedo-guide.jpg")`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                        }}>
                     <Row className="Top-padding-large">
                         <Col xs={2}/>
                         <Col xs={2}>
@@ -126,6 +134,26 @@ class Lobby extends Component {
                             </Button>
                         </Col>
                     </Row>
+                    <Row className="Top-padding-large"/>
+                    <Row className="Top-padding-large"/> 
+                    <Row className="Top-padding-large"/> 
+                    <Row className="Top-padding-large"/> 
+                    <Row className="Top-padding-large"/> 
+                    <Row className="Top-padding-large"/> 
+                    <Row className="Top-padding-large"/> 
+                    <Row className="Top-padding-large"/> 
+                    <Row className="Top-padding-large"/>
+                    <Row className="Top-padding-large"/>
+                    <Row className="Top-padding-large"/>
+                    <Row className="Top-padding-large"/>
+                    <Row className="Top-padding-large"/>
+                    <Row className="Top-padding-large"/>
+                    <Row className="Top-padding-large"/>
+                    <Row className="Top-padding-large"/>
+                    <Row className="Top-padding-large"/>
+                    <Row className="Top-padding-large"/>
+                    <Row className="Top-padding-large"/>
+    </div>
                 </Container>
             </React.Fragment>
         );

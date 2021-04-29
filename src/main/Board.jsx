@@ -111,6 +111,7 @@ class Board extends Component {
                 { this.rowRooms("Library", "hallway6", "Billiard Room", "hallway7", "Dining Room") }
                 { this.rowHallways("hallway8", "hallway9", "hallway10") }
                 { this.rowRooms("Conservatory", "hallway11", "Ballroom", "hallway12", "Kitchen") }
+                <img src="https://www.ultraboardgames.com/clue/gfx/weapons.jpg" alt="" height="176" width="715" />
             </Container>
         );
     }
